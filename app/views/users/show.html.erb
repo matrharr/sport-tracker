@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col-sm-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h4><%=@user.first_name%> <%=@user.last_name%></h4>
+        </div>  
+        <div class="panel-body">
+          <p>Email: <%=@user.email%></p>
+          <p>Height: <%=@user.height%> inches</p>
+          <p>Weight: <%=@user.weight%> lbs</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-sm-4">
+      
+      <h4>Follow a Sport</h4>
+        <form class="follow-sports" action="/users/<%=@user.id%>">
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <span id="sport-sel">Sport</span>
+              <span class="caret"></span>
+            </button>
+            <input type="submit" name="submit" value="Follow!">
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <% @sports.each do |sport| %>
+                <li class="sports"><a href='#'><%= sport.name %></a></li>
+              <% end %>
+            </ul>
+          </div>
+        </form>
+      
+    </div>
+
+    <div class="col-sm-4">
+      <h4>Record an Activity</h4>
+      <form class='record-activity' action="/activities">
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <span id="sport-cel">Sport</span>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <% @sports.each do |sport| %>
+              <li class="sportz"><a href='#'><%= sport.name %></a></li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="form-group">
+          <div class='input-group date' id='datetimepicker1'>
+            <input type='text' class="form-control" />
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
+        </div>
+        <input type="hidden" name="user_id" value="<%=@user.id%>">
+        <input type="text" name="duration" placeholder="Duration in minutes">
+        <input type="submit" name="submit" value="Record!">
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+  
+    <div class="col-sm-4">
+      <table class="table">
+      <thead>
+        <tr>
+          <th>Sports Followed</th>
+        </tr>
+      </thead>
+      <tbody class="sports-followed">
+        <% @user.sports.each do |sport|%>
+          <tr class="success">
+            <td><%= sport.name %></td>
+          </tr>
+        <% end %> 
+      </tbody>
+    </div>
+
+    <div class="col-sm-4">
+      <table class="table">
+      <thead>
+        <tr>
+          <th>Your Teams</th>
+        </tr>
+      </thead>
+      <tbody>  
+        <% @user.teams.each do |team|%>
+          <tr class="info">
+            <td><%= team.name %></td>
+          </tr>
+        <% end %> 
+      </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
